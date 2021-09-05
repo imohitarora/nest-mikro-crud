@@ -1,14 +1,9 @@
-import {
-    Entity,
-    Enum,
-    PrimaryKey,
-    Property
-} from '@mikro-orm/core';
+import { Entity, Enum, PrimaryKey, Property } from '@mikro-orm/core';
 
 @Entity()
 export class User {
   @PrimaryKey()
-  id: string;
+  id: number;
 
   @Property()
   createdAt = new Date();

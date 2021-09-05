@@ -9,4 +9,14 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: EntityRepository<User>,
   ) {}
+
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.findAll();
+  }
+
+  async findOne(id: number): Promise<User> {
+    let user: User = new User();
+    user.id = id;
+    return await this.userRepository.findOne(user);
+  }
 }
