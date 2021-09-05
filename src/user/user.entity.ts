@@ -1,15 +1,10 @@
 import { Entity, Enum, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity } from '../base/base.entity';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryKey()
   id: number;
-
-  @Property()
-  createdAt = new Date();
-
-  @Property({ onUpdate: () => new Date() })
-  updatedAt = new Date();
 
   @Property()
   name!: string;
@@ -19,27 +14,4 @@ export class User {
 
   @Property()
   age?: number;
-
-  @Property()
-  termsAccepted = false;
-
-  @Enum()
-  role!: UserRole; // string enum
-
-  @Enum()
-  status!: UserStatus; // numeric enum
 }
-
-export enum UserRole {
-  ADMIN = 'admin',
-  MODERATOR = 'moderator',
-  USER = 'user',
-}
-
-export const enum UserStatus {
-  DISABLED,
-  ACTIVE,
-}
-
-// or we could reexport OutsideEnum
-// export { OutsideEnum } from './OutsideEnum.ts';

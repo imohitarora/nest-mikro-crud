@@ -15,6 +15,7 @@ import { BaseModule } from './base/base.module';
       dbName: 'allio',
       type: 'postgresql',
       autoLoadEntities: true,
+      debug: true,
     }),
     UserModule,
     BaseModule,
