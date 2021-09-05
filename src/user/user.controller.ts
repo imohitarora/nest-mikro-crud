@@ -3,7 +3,7 @@ import { BaseController } from '../base/base.controller';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller('users')
 export class UserController extends BaseController<User> {
   constructor(public _service: UserService) {
     super(User, _service);

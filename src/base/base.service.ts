@@ -26,13 +26,13 @@ export abstract class BaseService<T> implements IBaseService<T> {
     }
   }
 
-  async update(entity: T): Promise<any> {
+  async update(oldEntity: T, entity: T): Promise<any> {
     try {
       console.log('Base Service Update', entity);
-      const responseAux: any = await this.genericRepository.findOne(entity);
+      const responseAux: any = await this.findOne(oldEntity);
       if (responseAux == null) throw new NotFoundException('Id does not exist');
-      let mergeEntity: any = Object.assign(responseAux, entity);
-      await this.genericRepository.persist(mergeEntity);
+      let mergeEntity = Object.assign(responseAux, entity);
+      await this.genericRepository.persistAndFlush(mergeEntity);
       return 'response';
     } catch (error) {
       Logger.log(error, 'BaseService');
@@ -44,7 +44,8 @@ export abstract class BaseService<T> implements IBaseService<T> {
     try {
       console.log('Saving entity');
       let mergeEntity = await this.genericRepository.create(entity);
-      await this.genericRepository.persistAndFlush(mergeEntity);
+      let resp = await this.genericRepository.persistAndFlush(mergeEntity);
+      console.log('Saved entity', resp);
       return entity;
     } catch (error) {
       Logger.log(error, 'BaseService');
@@ -52,14 +53,13 @@ export abstract class BaseService<T> implements IBaseService<T> {
     }
   }
 
-  delete(entity: T) {
+  async delete(entity: T) {
+    console.log('delete');
     try {
-      this.genericRepository.remove(entity);
+      await this.genericRepository.removeAndFlush(entity);
     } catch (error) {
       Logger.log(error, 'BaseService');
       throw new BadGatewayException(error);
     }
   }
-
-  persist(entity: T) {}
 }

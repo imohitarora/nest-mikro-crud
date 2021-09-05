@@ -52,7 +52,9 @@ export class BaseController<T> {
   @Put('/:id')
   async put(@Res() res, @Body() entity: T, @Param('id') id: number): Promise<T> {
     try {
-      const result: T = await this._IBaseService.update(entity);
+      let oldEntity = new this.type();
+      oldEntity['id'] = id;
+      const result: T = await this._IBaseService.update(oldEntity, entity);
       return res.status(HttpStatus.CREATED).json(result);
     } catch (error) {
       Logger.log(error, 'BaseController');
@@ -67,7 +69,7 @@ export class BaseController<T> {
     try {
       let entity = new this.type();
       entity['id'] = id;
-      this._IBaseService.delete(entity);
+      await this._IBaseService.delete(entity);
       return res.status(HttpStatus.NO_CONTENT).json();
     } catch (error) {
       Logger.log(error, 'BaseController');
