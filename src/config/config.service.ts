@@ -28,7 +28,6 @@ export class ConfigService {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       NODE_ENV: Joi.string().valid('development', 'production', 'test', 'provision').default('development'),
       PORT: Joi.number().default(3000),
-      REDIS_URL: Joi.string().required(),
     }).unknown(true);
 
     const { error, value: validatedEnvConfig } = envVarsSchema.validate(envConfig);
