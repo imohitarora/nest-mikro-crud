@@ -33,7 +33,7 @@ export abstract class BaseService<T> implements IBaseService<T> {
       if (responseAux == null) throw new NotFoundException('Id does not exist');
       let mergeEntity = Object.assign(responseAux, entity);
       await this.genericRepository.persistAndFlush(mergeEntity);
-      return 'response';
+      return mergeEntity;
     } catch (error) {
       Logger.log(error, 'BaseService');
       throw new BadGatewayException(error);
