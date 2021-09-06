@@ -24,6 +24,7 @@
     "@hapi/joi": "^17.1.1",
     "@mikro-orm/cli": "^4.5.9",
     "@mikro-orm/core": "^4.5.9",
+    "@mikro-orm/mongodb": "^4.5.9",
     "@mikro-orm/nestjs": "^4.3.0",
     "@mikro-orm/postgresql": "^4.5.9",
     "@nestjs/common": "^8.0.0",

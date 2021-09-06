@@ -1,4 +1,4 @@
-import { MikroOrmModule, MikroOrmModuleAsyncOptions } from '@mikro-orm/nestjs';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
